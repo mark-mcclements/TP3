@@ -42,43 +42,61 @@ function runnerdiff(){
         $racerid=$racer[0];
         $runnerdata=retrieveAllRunnerData($runnerid, $i, $j);
         $datalength=count($runnerdata);
-        for($i=0;$i<$arrlength;$i++){
+        for($i=0;$i<$datalength;$i++){
             $data=$runnerdata[$i];
             $datarace=$data[1];
             $races=array(retrieveRaceData($y,$z ));
-            for($z=0;$z<$arrlength;$z++){
+			$racelength=count($runnerdata);
+            for($z=0;$z<$racelength;$z++){
                 $race=$races[$z];
                 $racename=$race[1];
                 $dif=$race[11];
                 if($datarace==$racename){
                     $runnerdif=$runnerdif+$dif;
+					insertRunnerSkill($racerid,$diff);  
                 }
             }
         }
     }
 }
 
-function racerbands($array){
-       $maxraces=maxNoRaces($array);
-       $bandseperator=$maxraces/10;
-       $racebands=array($bandseperator);
-       $x=$bandseperator*2;
-       $i=1;
-       while($x<=$maxraces){
-           array_push($racebands,$x);
-           $x=$x+$bandseperator;
-           }
-       return $racebands;
+function racerbands(){
+	$maxraces=maxNoRaces();
+    $bandseperator=$maxraces/10;
+    $racebands=array($bandseperator);
+    $x=$bandseperator*2;
+    $i=1;
+    while($x<=$maxraces){
+        array_push($racebands,$x);
+        $x=$x+$bandseperator;
+    }
+	$racers=array(retrieveRunnerData());
+    $racerslength=count($racers);
+    for($x=0;$x<$arrlength;$x++){
+        $racer=$racers[$x];
+		$racerid=$racer[0];
+        $runnerdata=retrieveAllRunnerData($runnerid, $i, $j);
+        $datalength=count($runnerdata);
+		for($i=0;$i<10;i++){
+			if($datalength<=$racebands[i]{
+				insertRunnerBand($rID,$band){
+				}
+			}	
+		}
+	}
 }
 
-  function maxNoRaces($array){
-   $x=$array[0];
-   $max=$x->getNoRaces();
-   $arrlength=count($array);
-   for($i=0;$i<$arrlength;$i++){
-       $noraces=$array[$i]->getNoRaces();
-       if($noraces>$max){
-           $max=$noraces;
+function maxNoRaces(){
+	$max=0;
+	$racers=array(retrieveRunnerData());
+    $racerslength=count($racers);
+    for($x=0;$x<$arrlength;$x++){
+        $racer=$racers[$x];
+        $racerid=$racer[0];
+        $runnerdata=retrieveAllRunnerData($runnerid, $i, $j);
+        $datalength=count($runnerdata);
+        if($datalength>$max){
+			$max=$noraces;
        }
    }
    return $max;
